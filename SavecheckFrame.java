@@ -27,13 +27,7 @@ import java.awt.event.ActionEvent;
  /**
   * Launch the application.
   */
- public static void main(String[] args) {
-//   Account saving = new Savings(0.00);
-//   SavecheckFrame window = new SavecheckFrame(saving) ;
-//   window.savecheckframe.setVisible(true);
-  // SavecheckFrame window1 = new SavecheckFrame(saving,"withdraw") ;
-  // window1.halfframe.setVisible(true);
- }
+
 
 
  public SavecheckFrame(Account savechecking) {
@@ -52,23 +46,23 @@ import java.awt.event.ActionEvent;
   justframe.setResizable(false);
   justframe.setBounds(100, 100, 450, 300);
   justframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-  justframe.getContentPane().setLayout(null);
+  justframe.getContentPane().setLayout(new GridLayout(2, 1));
   justframe.getContentPane().setBackground(Color.PINK);
 
 
-  JScrollPane scrollPane_1 = new JScrollPane(null,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-  scrollPane_1.setBounds(0, 0, 450, 278);
-  justframe.getContentPane().add(scrollPane_1);
+  JPanel panel = new JPanel();
+  panel.setBackground(Color.pink);
+  justframe.getContentPane().add(panel);
 
   if(savechecking instanceof Savings) {
    for(Transaction txn: savechecking.view_txns()) {
-    scrollPane_1.add(new JLabel(txn.getId()+" $ " + txn.getAmount()));
+	   panel.add(new JLabel(txn.getId()+" $ " + txn.getAmount()));
 
    }
   }
   else {
    for(Transaction txn: savechecking.view_txns()) {
-    scrollPane_1.add(new JLabel(txn.getId()+" $ " + txn.getAmount()));
+	   panel.add(new JLabel(txn.getId()+" $ " + txn.getAmount()));
    }
   }
    //   JPanel panel = new JPanel();
@@ -112,7 +106,7 @@ import java.awt.event.ActionEvent;
       savechecking.deposit(amount,"CAD");
 
      }catch(Exception e1) {
-      JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+      JOptionPane.showMessageDialog(null, "only integer allowed");
      }
     }
     else {
@@ -121,7 +115,7 @@ import java.awt.event.ActionEvent;
       savechecking.withDraw(amount,"CAD");
 
      }catch(Exception e1) {
-      JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+         JOptionPane.showMessageDialog(null, e1+ " cant withdraw");
      }
     }
    }
@@ -161,7 +155,7 @@ import java.awt.event.ActionEvent;
       savechecking.deposit(amount,"USD");
 
      }catch(Exception e1) {
-      JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+      JOptionPane.showMessageDialog(null, "only integer allowed");
      }
     }
     else {
@@ -170,7 +164,7 @@ import java.awt.event.ActionEvent;
       savechecking.withDraw(amount,"USD");
 
      }catch(Exception e1) {
-      JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+         JOptionPane.showMessageDialog(null, e1+ " cant withdraw");
      }
     }
    }
@@ -188,7 +182,7 @@ import java.awt.event.ActionEvent;
       JOptionPane.showMessageDialog(null, "deposited " + amount +"!");
 
      }catch(Exception e1) {
-      JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+      JOptionPane.showMessageDialog(null,"only integer allowed");
      }
     }
     else {
@@ -198,7 +192,7 @@ import java.awt.event.ActionEvent;
       JOptionPane.showMessageDialog(null, "withDraw " + amount +"!");
 
      }catch(Exception e1) {
-      JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+         JOptionPane.showMessageDialog(null, e1+ " cant withdraw");
      }
     }
    }
@@ -246,8 +240,8 @@ import java.awt.event.ActionEvent;
    @Override
    public void mouseClicked(MouseEvent e) {
     JOptionPane.showMessageDialog(null, savechecking.check_balance());
-    SavecheckFrame window = new SavecheckFrame(savechecking,true) ;
-    window.justframe.setVisible(true);
+//    SavecheckFrame window = new SavecheckFrame(savechecking,true) ;
+//    window.justframe.setVisible(true);
    }
   });
   bal.setBounds(171, 243, 117, 29);
@@ -310,7 +304,7 @@ import java.awt.event.ActionEvent;
      JOptionPane.showMessageDialog(null, "deposit " + amount +"!");
 
     }catch(Exception e1) {
-     JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+     JOptionPane.showMessageDialog(null, "only integer allowed");
     }
    }
   });
@@ -341,7 +335,7 @@ import java.awt.event.ActionEvent;
      JOptionPane.showMessageDialog(null, "deposit " + amount +"!");
 
     }catch(Exception e1) {
-     JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+     JOptionPane.showMessageDialog(null, "only integer allowed");
     }
    }
   });
@@ -358,7 +352,7 @@ import java.awt.event.ActionEvent;
      JOptionPane.showMessageDialog(null, "deposit " + amount +"!");
 
     }catch(Exception e1) {
-     JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+     JOptionPane.showMessageDialog(null,"only integer allowed");
     }
    }
   });
@@ -375,7 +369,7 @@ import java.awt.event.ActionEvent;
      JOptionPane.showMessageDialog(null, "withDraw " + amount +"!");
 
     }catch(Exception e1) {
-     JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+        JOptionPane.showMessageDialog(null, e1+ " cant withdraw");
     }
    }
   });
@@ -392,7 +386,7 @@ import java.awt.event.ActionEvent;
      JOptionPane.showMessageDialog(null, "withDraw " + amount +"!");
 
     }catch(Exception e1) {
-     JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+        JOptionPane.showMessageDialog(null, e1+ " cant withdraw");
     }
    }
   });
@@ -409,7 +403,7 @@ import java.awt.event.ActionEvent;
       JOptionPane.showMessageDialog(null, "withDraw " + amount +"!");
 
     }catch(Exception e1) {
-     JOptionPane.showMessageDialog(null, e1 + "only integer allowed");
+        JOptionPane.showMessageDialog(null, e1+ " cant withdraw");
     }
    }
   });

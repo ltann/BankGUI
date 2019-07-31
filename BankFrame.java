@@ -1,4 +1,4 @@
-// package bank;
+ // package bank;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -46,16 +46,7 @@ public class BankFrame {
  /**
   * Launch the application.
   */
- public static void main(String[] args) {
-//    HashMap<String, Customer> customers = new HashMap<>();
-//
-//    Manager bankManager = new Manager(customers,"louis","1234");
-//
-//   BankFrame window = new BankFrame(bankManager);
-//   window.bankframe.setVisible(true);
-//   BankFrame window1 = new BankFrame();
-//   window1.accframe.setVisible(true);
- }
+
 
 
  public BankFrame(HashMap<String, Customer> customers) {
@@ -110,6 +101,14 @@ public class BankFrame {
   JButton Saving_btn = new JButton("Saving Account ");
   Saving_btn.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
+	   if(userpwd.getText().equals("")) {
+		   JOptionPane.showMessageDialog(null, "enter your password!!");
+		   return;
+	   }
+		 if(customers.containsKey(userid.getText())) {
+			   JOptionPane.showMessageDialog(null, "your id is already existed!!");
+			 return;
+			}
     Customer newcust = new Customer(saving,username.getText(),userid.getText(),userpwd.getText());
     customers.put(userid.getText(),newcust);
     JOptionPane.showMessageDialog(null, "Your saving account is all set, please log in with your username and password");
@@ -122,6 +121,14 @@ public class BankFrame {
   checkingBTN = new JButton("Checking Account ");
   checkingBTN.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
+	   if(userpwd.getText().equals("")) {
+		   JOptionPane.showMessageDialog(null, "enter your password!!");
+		   return;
+	   }
+		 if(customers.containsKey(userid.getText())) {
+			   JOptionPane.showMessageDialog(null, "your id is already existed!!");
+			 return;
+			}
     Customer newcust = new Customer(check,username.getText(),userid.getText(),userpwd.getText());
     customers.put(userid.getText(),newcust);
     JOptionPane.showMessageDialog(null, "Your checking account is all set, please log in with your username and password");
@@ -134,6 +141,14 @@ public class BankFrame {
   BothBTn = new JButton("Both");
   BothBTn.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
+	   if(userpwd.getText().equals("")) {
+		   JOptionPane.showMessageDialog(null, "enter your password!!");
+		   return;
+	   }
+	 if(customers.containsKey(userid.getText())) {
+		   JOptionPane.showMessageDialog(null, "your id is already existed!!");
+		 return;
+		}
     Customer newcust = new Customer(check,username.getText(),userid.getText(),userpwd.getText());
     newcust.addAccount(saving);
     customers.put(userid.getText(),newcust);
@@ -170,12 +185,12 @@ public class BankFrame {
   Customer_Click.addMouseListener(new MouseAdapter() {
    @Override
    public void mouseClicked(MouseEvent e) {
-     if (customers.containsKey(user_name.getText())) {
+     if (customers.containsKey(user_name.getText()) && customers.get(user_name.getText()).getpwd().equals(customerpwd.getText())) {
       //id for now
       customers.get(user_name.getText()).makeFrame();
      }
      else {
-     JOptionPane.showMessageDialog(null, "username is not correct");
+     JOptionPane.showMessageDialog(null, "username or password is not correct");
      }
 //    JOptionPane.showMessageDialog(null, "username or password is not correct");
     //pops out Customer frame if they correctly match the credentials
@@ -208,8 +223,9 @@ public class BankFrame {
   Customer.add(createaccBTN);
   createaccBTN.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
-    BankFrame window = new BankFrame(customers);
-     window.accframe.setVisible(true);
+		    BankFrame window = new BankFrame(customers);
+		     window.accframe.setVisible(true);
+//		    JOptionPane.showMessageDialog(null, err+ "your id is already existed!!");
    }
   });
 
@@ -223,8 +239,9 @@ public class BankFrame {
   Official_click = new JButton("Official Login");
   Official_click.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
-    if(bankManager.isManager(official_username.getText(),officialpwd.getText())==true) {
-     bankManager.createMFrame();
+    if(bankManager.isManager(official_username.getText(),officialpwd.getText())==true){
+      Manager mymana = new Manager(customers,"louis","1234");
+    	mymana.createMFrame();
    }
    else {
     JOptionPane.showMessageDialog(null, "manager password or username is wrong");
